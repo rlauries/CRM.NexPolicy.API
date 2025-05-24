@@ -60,3 +60,4 @@ obj/
 *.dbmdl
 .env
 .vs/
+* text=auto
