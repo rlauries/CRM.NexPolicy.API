@@ -1,0 +1,6 @@
+@CRM.NexPolicy_HostAddress = http://localhost:5200
+
+GET {{CRM.NexPolicy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
