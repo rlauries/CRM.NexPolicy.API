@@ -1,7 +1,9 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models;
+
 using CRM.NexPolicy.src.ServiceLayer.Agent;
 using CRM.NexPolicy.src.ViewLayer.DTOs;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Agent;
+using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +21,7 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
         }
 
         // POST: api/agent
-        [HttpPost]
+        [HttpPost("CreateAgent")]
         public async Task<IActionResult> CreateAgent([FromBody] CreateAgentDto dto)
         {
             if (!ModelState.IsValid)
@@ -50,31 +52,24 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
             return CreatedAtAction(nameof(GetAgentById), new { id = created.Id }, created);
         }
 
-
         // GET: api/agent/5
-        [HttpGet("{id:int}")]
+        [HttpGet("GetAgentById/{id:int}")]
         public async Task<IActionResult> GetAgentById(int id)
         {
-            var agent = await _agentService.GetAgentByIdAsync(id);
-
-            if (agent == null)
+            var agentDto = await _agentService.GetAgentDtoByIdAsync(id);
+            if (agentDto == null)
                 return NotFound();
 
-            var dto = new AgentResponseDto
-            {
-                Id = agent.Id,
-                FullName = $"{agent.FirstName} {agent.LastName}",
-                Email = agent.Email,
-                LicenseNumber = agent.LicenseNumber,
-                Leads = agent.Leads?
-                    .Select(l => new LeadSummaryDto
-                    {
-                        Id = l.ID,
-                        Name = $"{l.Name} {l.LastName}",
-                        Email = l.Email
-                    }).ToList() ?? new()
-            };
-            return Ok(dto);
+            return Ok(agentDto);
         }
+
+        // GET: api/agent
+        [HttpGet("GetAllAgents")]
+        public async Task<IActionResult> GetAllAgents()
+        {
+            var agentDtos = await _agentService.GetAllAgentDtosAsync();
+            return Ok(agentDtos);
+        }
+
     }
 }

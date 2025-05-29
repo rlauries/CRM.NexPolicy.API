@@ -1,12 +1,9 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Data.SqlClient;
-using System.Data;
-using CRM.NexPolicy.src.DataLayer.Models;
-using CRM.NexPolicy.src.DataLayer.Repository.Lead;
-using System;
-using CRM.NexPolicy.src.DataLayer.Repository;
 
+using CRM.NexPolicy.src.DataLayer.Repository;
+using CRM.NexPolicy.src.DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
+using CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
 
 public class LeadRepository : ILeadRepository
 {
@@ -27,6 +24,8 @@ public class LeadRepository : ILeadRepository
     {
         return await _dbContext.Leads
             .Include(l => l.Agent) // incluye datos del agente si están relacionados
+            .Include(l => l.Status)
+            .Include(l => l.LeadSource)
             .FirstOrDefaultAsync(l => l.ID == leadId);
     }
     public async Task UpdateAsync(LeadModel lead)
@@ -35,5 +34,13 @@ public class LeadRepository : ILeadRepository
         await _dbContext.SaveChangesAsync();
     }
 
+    public async Task<List<LeadModel>> GetAllLeadsAsync()
+    {
+        return await _dbContext.Leads
+            .Include(l => l.Agent)
+            .Include(l => l.Status)
+            .Include(l => l.LeadSource)
+            .ToListAsync();
+    }
 
 }

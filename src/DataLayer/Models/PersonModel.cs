@@ -1,4 +1,4 @@
-﻿using static CRM.NexPolicy.src.DataLayer.Enums.EnumExtensions;
+﻿
 
 namespace CRM.NexPolicy.src.DataLayer.Models
 {
@@ -6,7 +6,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models
     {
         public int Id { get; set; }
 
-        // Información básica
+        // From Lead
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -18,7 +18,11 @@ namespace CRM.NexPolicy.src.DataLayer.Models
         public string? Nickname { get; set; }
         public string? Title { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public GenderType Gender { get; set; } = GenderType.Unknown;
+
+        // 🔁 Foreign Key a GenderTypes
+        public int GenderId { get; set; }
+        public GenderTypeModel? Gender { get; set; }
+
         public string? SSN { get; set; }
         public string? DriversLicenseNumber { get; set; }
         

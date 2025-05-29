@@ -1,4 +1,6 @@
-﻿using static CRM.NexPolicy.src.DataLayer.Enums.EnumExtensions;
+﻿
+
+using CRM.NexPolicy.src.DataLayer.Models;
 
 namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agent
 {
@@ -13,7 +15,7 @@ namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agent
         public string? Nickname { get; set; }
         public string? Title { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public GenderType Gender { get; set; } = GenderType.Unknown;
+        public GenderTypeModel? Gender { get; set; }
         public string? SSN { get; set; }
         public string? DriversLicenseNumber { get; set; }
 

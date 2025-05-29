@@ -1,5 +1,5 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models;
-using CRM.NexPolicy.src.ServiceLayer.Lead;
+using CRM.NexPolicy.src.ServiceLayer.LeadServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
             _leadService = leadService;
         }
 
-        [HttpPost("createLead/")]
+        [HttpPost("CreateLead")]
         public async Task<IActionResult> CreateLead([FromBody] LeadModel lead)
         {
             if (!ModelState.IsValid)
@@ -34,13 +34,18 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
         }
 
         // (opcional) Ejemplo de GET para CreatedAtAction
-        [HttpGet("getLeadById/{id}")]
-        public IActionResult GetLeadById(int id)
+        [HttpGet("GetLeadById/{id:int}")]
+        public async Task<IActionResult> GetLeadById(int id)
         {
-            return Ok(new { Message = $"Dummy GET response for lead ID {id}" });
+            var lead = await _leadService.GetLeadWithAgentNameByIdAsync(id);
+            if (lead == null)
+                return NotFound(new { message = $"Lead with ID {id} not found." });
+
+            return Ok(lead);
         }
 
-        [HttpPut("UpdateLead/{id}")]
+
+        [HttpPut("UpdateLeadById/{id}")]
         public async Task<IActionResult> UpdateLead(int id, [FromBody] LeadModel updatedLead)
         {
             if (id != updatedLead.ID)
@@ -61,6 +66,13 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
             {
                 return StatusCode(500, new { message = "An error occurred.", error = ex.Message });
             }
+        }
+
+        [HttpGet("GetAllLeads")]
+        public async Task<IActionResult> GetAllLeads()
+        {
+            var leads = await _leadService.GetAllLeadsWithAgentAsync();
+            return Ok(leads);
         }
 
     }

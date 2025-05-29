@@ -12,7 +12,7 @@
 
         public string? PlanType { get; set; }
 
-        public DateTime? EnrollmentDate { get; set; }
+        public DateTime EnrollmentDate { get; set; } = DateTime.UtcNow;
 
         // 🔁 Relación con agente asignado
         public int? AgentId { get; set; }

@@ -1,4 +1,5 @@
-﻿using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
+﻿using CRM.NexPolicy.src.ViewLayer.DTOs.Customer;
+using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
 
 namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agent
 {
@@ -9,5 +10,6 @@ namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agent
         public string Email { get; set; } = string.Empty;
         public string LicenseNumber { get; set; } = string.Empty;
         public List<LeadSummaryDto> Leads { get; set; } = new();
+        public List<CustomerSummaryDto> Customers { get; set; } = new();
     }
 }
