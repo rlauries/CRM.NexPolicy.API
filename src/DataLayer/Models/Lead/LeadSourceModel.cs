@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CRM.NexPolicy.src.DataLayer.Models
+namespace CRM.NexPolicy.src.DataLayer.Models.Lead
 {
     public class LeadSourceModel
     {

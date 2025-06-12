@@ -1,9 +1,14 @@
-﻿
+﻿using CRM.NexPolicy.src.DataLayer.Models.Agency;
+using CRM.NexPolicy.src.DataLayer.Models.Customer;
+using CRM.NexPolicy.src.DataLayer.Models.Lead;
+using CRM.NexPolicy.src.DataLayer.Models.Person;
 
-namespace CRM.NexPolicy.src.DataLayer.Models
+namespace CRM.NexPolicy.src.DataLayer.Models.Agent
 {
     public class AgentModel : PersonModel
     {
+        public int AgencyId { get; set; }
+        public AgencyModel Agency { get; set; } = null!;
         public string LicenseNumber { get; set; } = string.Empty;
         public DateTime ContractedDate { get; set; }
         public bool IsActive { get; set; } = true;

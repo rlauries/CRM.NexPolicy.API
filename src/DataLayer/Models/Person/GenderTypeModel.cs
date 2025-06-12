@@ -1,4 +1,4 @@
-﻿namespace CRM.NexPolicy.src.DataLayer.Models
+﻿namespace CRM.NexPolicy.src.DataLayer.Models.Person
 {
     public class GenderTypeModel
     {

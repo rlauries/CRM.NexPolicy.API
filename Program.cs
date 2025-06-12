@@ -9,6 +9,8 @@ using CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
 using CRM.NexPolicy.src.DataLayer.Repository.ReferenceDataRepository;
 using CRM.NexPolicy.src.ServiceLayer.ReferenceDataService;
 using CRM.NexPolicy.src.ServiceLayer.LeadServices;
+using CRM.NexPolicy.src.ServiceLayer.AgencyServices;
+using CRM.NexPolicy.src.DataLayer.Repository.AgencyRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,12 +20,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Repositories
+builder.Services.AddScoped<IAgencyRepository, AgencyRepository>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ILeadRepository, LeadRepository>();
 builder.Services.AddScoped<IReferenceDataRepository, ReferenceDataRepository>();
 
 // Services
+builder.Services.AddScoped<IAgencyService, AgencyService>();
 builder.Services.AddScoped<IAgentService, AgentService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<ILeadService,LeadService>();

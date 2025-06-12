@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Lead;
 using CRM.NexPolicy.src.ServiceLayer.LeadServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,9 +1,9 @@
 ﻿
 
 using CRM.NexPolicy.src.DataLayer.Repository;
-using CRM.NexPolicy.src.DataLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
+using CRM.NexPolicy.src.DataLayer.Models.Lead;
 
 public class LeadRepository : ILeadRepository
 {

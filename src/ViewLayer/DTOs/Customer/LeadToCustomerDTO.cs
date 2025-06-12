@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Person;
 
 namespace CRM.NexPolicy.src.ViewLayer.DTOs.Customer
 {

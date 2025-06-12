@@ -1,9 +1,11 @@
-﻿using Microsoft.VisualBasic;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Agency;
+using CRM.NexPolicy.src.DataLayer.Models.Agent;
+using Microsoft.VisualBasic;
 using System.Text.Json.Serialization;
 
 
 
-namespace CRM.NexPolicy.src.DataLayer.Models
+namespace CRM.NexPolicy.src.DataLayer.Models.Lead
 {
     public class LeadModel
     {
@@ -27,6 +29,11 @@ namespace CRM.NexPolicy.src.DataLayer.Models
 
         public bool IsConvertedToCustomer { get; set; } = false;
         public DateTime? ConvertedToCustomerAt { get; set; }
+
+
+        //✅Agency fk
+        public int AgencyId { get; set; }
+        public AgencyModel Agency { get; set; } = null!;
 
         // ✅ Foreign key a tabla Agents
         public int? AssignedAgentID { get; set; }

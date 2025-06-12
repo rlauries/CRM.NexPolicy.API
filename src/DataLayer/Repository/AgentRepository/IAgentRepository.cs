@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
 
 namespace CRM.NexPolicy.src.DataLayer.Repository.Agent
 {

@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Lead;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
 
 namespace CRM.NexPolicy.src.ServiceLayer.LeadServices

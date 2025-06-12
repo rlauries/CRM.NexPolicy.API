@@ -1,4 +1,5 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Lead;
+using CRM.NexPolicy.src.DataLayer.Models.Person;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.NexPolicy.src.DataLayer.Repository.ReferenceDataRepository

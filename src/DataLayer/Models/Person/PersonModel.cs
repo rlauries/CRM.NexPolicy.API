@@ -1,6 +1,4 @@
-﻿
-
-namespace CRM.NexPolicy.src.DataLayer.Models
+﻿namespace CRM.NexPolicy.src.DataLayer.Models.Person
 {
     public abstract class PersonModel
     {
@@ -25,6 +23,6 @@ namespace CRM.NexPolicy.src.DataLayer.Models
 
         public string? SSN { get; set; }
         public string? DriversLicenseNumber { get; set; }
-        
+
     }
 }

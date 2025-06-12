@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Agent;
 
 namespace CRM.NexPolicy.src.ServiceLayer.Agent

@@ -1,4 +1,4 @@
-﻿using CRM.NexPolicy.src.DataLayer.Models;
+﻿using CRM.NexPolicy.src.DataLayer.Models.Lead;
 namespace CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
 
 public interface ILeadRepository
