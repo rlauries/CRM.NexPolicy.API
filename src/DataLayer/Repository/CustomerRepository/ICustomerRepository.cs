@@ -1,7 +1,7 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Customer;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Customer;
 
-namespace CRM.NexPolicy.src.DataLayer.Repository.Customer
+namespace CRM.NexPolicy.src.DataLayer.Repository.CustomerRepository
 {
     public interface ICustomerRepository
     {

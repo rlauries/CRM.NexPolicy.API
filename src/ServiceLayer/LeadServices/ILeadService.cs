@@ -5,7 +5,7 @@ namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
 {
     public interface ILeadService
     {
-        Task<int> RegisterLeadAsync(LeadModel lead); 
+        Task<int> RegisterLeadAsync(CreateLeadDto lead); 
         Task<bool> UpdateLeadAsync(LeadModel lead);
         Task<LeadWithAgentDto?> GetLeadWithAgentNameByIdAsync(int id);
         Task<IEnumerable<LeadWithAgentDto>> GetAllLeadsWithAgentAsync();

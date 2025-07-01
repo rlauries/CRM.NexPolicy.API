@@ -9,8 +9,8 @@ namespace CRM.NexPolicy.src.ServiceLayer.AgencyServices
 
         Task<AgencyModel?> GetAgencyByIdAsync(int id);
         Task<List<AgencyModel>> GetAllAgenciesAsync();
-        Task<AgencyModel> CreateAgencyWithIdAsync(int id, string businessName);
+        Task<AgencyModel> CreateAgencyWithIdAsync(int id, string email, string businessName, string profileImageUrl);
 
-        Task<bool> UpdateProfileAgencyAsync(int id, CreateAgencyDto agency);
+        Task<bool> UpdateProfileAgencyAsync(int id, UpdateAgencyDto agency);
     }
 }

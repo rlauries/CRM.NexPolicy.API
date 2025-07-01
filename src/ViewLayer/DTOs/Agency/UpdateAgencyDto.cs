@@ -1,6 +1,6 @@
 ﻿namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agency
 {
-    public class CreateAgencyDto
+    public class UpdateAgencyDto
     {
         public string BusinessName { get; set; } = string.Empty;
         public string? TaxId { get; set; }

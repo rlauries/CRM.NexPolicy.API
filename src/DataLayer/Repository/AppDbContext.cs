@@ -1,21 +1,27 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agency;
 using CRM.NexPolicy.src.DataLayer.Models.Agent;
+using CRM.NexPolicy.src.DataLayer.Models.Auth;
 using CRM.NexPolicy.src.DataLayer.Models.Customer;
 using CRM.NexPolicy.src.DataLayer.Models.Lead;
 using CRM.NexPolicy.src.DataLayer.Models.Person;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore; // Ya lo tienes ✅
+
+
 
 namespace CRM.NexPolicy.src.DataLayer.Repository
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<AgencyModel> Agencies { get; set; }
+        //Auth
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<UserRoleModel> UserRoles { get; set; }
 
-        
+        //Basic Entitity
+        public DbSet<AgencyModel> Agencies { get; set; }
         public DbSet<AgentModel> Agents { get; set; }
         public DbSet<LeadModel> Leads { get; set; }
         public DbSet<CustomerModel> Customers { get; set; }
-        
+
         //Table References for Normalization
         public DbSet<GenderTypeModel> GenderTypes { get; set; }
         public DbSet<LeadSourceModel> LeadSources { get; set; }
@@ -32,10 +38,13 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
             modelBuilder.Entity<CustomerModel>().ToTable("Customers");
             modelBuilder.Entity<LeadModel>().ToTable("Leads");
             modelBuilder.Entity<LeadSourceModel>().ToTable("LeadSources");
+            modelBuilder.Entity<UserModel>().ToTable("Users");
+            modelBuilder.Entity<UserRoleModel>().ToTable("UserRoles");
 
             // ============================ AGENCY ============================
             modelBuilder.Entity<AgencyModel>(entity =>
             {
+                entity.HasKey(a => a.Id);
                 entity.HasMany(a => a.Agents)
                       .WithOne(ag => ag.Agency)
                       .HasForeignKey(ag => ag.AgencyId);
@@ -90,7 +99,7 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
-           
+
 
 
 

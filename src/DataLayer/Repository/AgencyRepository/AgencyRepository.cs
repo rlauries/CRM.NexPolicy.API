@@ -1,4 +1,5 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agency;
+using CRM.NexPolicy.src.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace CRM.NexPolicy.src.DataLayer.Repository.AgencyRepository
@@ -19,7 +20,8 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.AgencyRepository
 
         public async Task<AgencyModel?> GetByIdAsync(int id)
         {
-            return await _dbContext.Agencies.Include(a => a.Agents).FirstOrDefaultAsync(a => a.Id == id);
+            return await _dbContext.Agencies
+                .FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<AgencyModel> AddAsync(AgencyModel agency)
@@ -32,6 +34,17 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.AgencyRepository
         {
             _dbContext.Agencies.Update(agency);
             return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<bool> UpdateProfileImageUrlAsync(int agencyId, string imageUrl)
+        {
+            var agency = await GetByIdAsync(agencyId);
+
+            if (agency == null) return false;
+
+            agency.ProfileImageUrl = imageUrl;
+            _dbContext.Agencies.Update(agency);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }

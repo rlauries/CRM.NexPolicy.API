@@ -1,6 +1,6 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Customer;
 using CRM.NexPolicy.src.DataLayer.Repository;
-using CRM.NexPolicy.src.DataLayer.Repository.Customer;
+using CRM.NexPolicy.src.DataLayer.Repository.CustomerRepository;
 using CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Customer;
 using Microsoft.EntityFrameworkCore;

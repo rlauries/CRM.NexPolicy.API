@@ -8,5 +8,6 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.AgencyRepository
         Task<AgencyModel?> GetByIdAsync(int id);
         Task<AgencyModel> AddAsync(AgencyModel agency);
         Task<bool> UpdateAsync(AgencyModel agency);
+        Task<bool> UpdateProfileImageUrlAsync(int agencyId, string imageUrl);
     }
 }

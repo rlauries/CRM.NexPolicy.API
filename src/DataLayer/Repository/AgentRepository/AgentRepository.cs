@@ -1,7 +1,8 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
+using CRM.NexPolicy.src.DataLayer.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace CRM.NexPolicy.src.DataLayer.Repository.Agent
+namespace CRM.NexPolicy.src.DataLayer.Repository.AgentRepository
 {
     public class AgentRepository : IAgentRepository
     {

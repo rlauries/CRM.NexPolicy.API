@@ -13,7 +13,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Agency
         public string BusinessName { get; set; } = string.Empty;
         public string? TaxId { get; set; }
         public string? NPN { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; }
         public string? Phone { get; set; }
         public string? OwnerName { get; set; }
         public string? Website { get; set; }
@@ -22,7 +22,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Agency
         public string? State { get; set; }
         public string? ZipCode { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
+        public string? ProfileImageUrl { get; set; }
         // Relationships
         public List<AgentModel>? Agents { get; set; }
         public List<LeadModel>? Leads { get; set; }

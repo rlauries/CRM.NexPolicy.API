@@ -19,19 +19,21 @@ namespace CRM.NexPolicy.src.ServiceLayer.AgencyServices
 
         public Task<AgencyModel?> GetAgencyByIdAsync(int id) => _agencyRepository.GetByIdAsync(id);
 
-        public async Task<AgencyModel> CreateAgencyWithIdAsync(int id, string businessName)
+        public async Task<AgencyModel> CreateAgencyWithIdAsync(int id, string email, string businessName, string profileImageUrl)
         {
             var agency = new AgencyModel
             {
                 Id = id,
+                Email = email,
                 BusinessName = businessName,
+                ProfileImageUrl = profileImageUrl,
                 CreatedAt = DateTime.UtcNow
             };
             return await _agencyRepository.AddAsync(agency);
         }
 
 
-        public async Task<bool> UpdateProfileAgencyAsync(int id, CreateAgencyDto dto)
+        public async Task<bool> UpdateProfileAgencyAsync(int id, UpdateAgencyDto dto)
         {
             try
             {
@@ -45,6 +47,7 @@ namespace CRM.NexPolicy.src.ServiceLayer.AgencyServices
                 existing.NPN = dto.NPN;
                 existing.Email = dto.Email;
                 existing.Phone = dto.Phone;
+                existing.OwnerName = dto.OwnerName;
                 existing.Website = dto.Website;
                 existing.Address = dto.Address;
                 existing.City = dto.City;

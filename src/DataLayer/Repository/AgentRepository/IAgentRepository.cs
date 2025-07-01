@@ -1,6 +1,6 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
 
-namespace CRM.NexPolicy.src.DataLayer.Repository.Agent
+namespace CRM.NexPolicy.src.DataLayer.Repository.AgentRepository
 {
     public interface IAgentRepository
     {

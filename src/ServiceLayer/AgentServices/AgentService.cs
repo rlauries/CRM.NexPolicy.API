@@ -1,5 +1,5 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
-using CRM.NexPolicy.src.DataLayer.Repository.Agent;
+using CRM.NexPolicy.src.DataLayer.Repository.AgentRepository;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Agent;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Customer;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;

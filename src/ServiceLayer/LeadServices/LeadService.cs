@@ -14,13 +14,18 @@ namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
             _leadRepository = leadRepository;
         }
 
-        public async Task<int> RegisterLeadAsync(LeadModel lead)
+        public async Task<int> RegisterLeadAsync(CreateLeadDto lead)
         {
-            if (!Enum.IsDefined(typeof(LeadSourceModel), lead.LeadSourceId))
-                throw new ArgumentException("Invalid lead source");
+            var creatingLeads = new LeadModel();
+            creatingLeads.Name = lead.Name;
+            creatingLeads.LastName = lead.LastName;
+            creatingLeads.Email = lead.Email;
+            creatingLeads.PhoneNumber = lead.PhoneNumber;
+            creatingLeads.StatusId = lead.StatusId;
+            creatingLeads.LeadSourceId = lead.LeadSourceId;
 
             // Aquí puedes agregar lógica adicional (validaciones, normalización, etc.)
-            return await _leadRepository.InsertAsync(lead);
+            return await _leadRepository.InsertAsync(creatingLeads);
         }
         public async Task<bool> UpdateLeadAsync(LeadModel lead)
         {

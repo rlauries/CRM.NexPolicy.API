@@ -1,5 +1,6 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Lead;
 using CRM.NexPolicy.src.ServiceLayer.LeadServices;
+using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
         }
 
         [HttpPost("CreateLead")]
-        public async Task<IActionResult> CreateLead([FromBody] LeadModel lead)
+        public async Task<IActionResult> CreateLead([FromBody] CreateLeadDto lead)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

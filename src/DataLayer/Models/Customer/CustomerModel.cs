@@ -21,7 +21,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Customer
         //🔁Agency fk
         public int AgencyId { get; set; }
         public AgencyModel Agency { get; set; } = null!;
-        
+
         // 🔁 Relación con agente asignado
         public int? AgentId { get; set; }
         public AgentModel? Agent { get; set; }

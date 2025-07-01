@@ -1,4 +1,5 @@
 ﻿using CRM.NexPolicy.src.ServiceLayer.AgencyServices;
+using CRM.NexPolicy.src.ServiceLayer.UploadImageServices;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Agency;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
     public class AgencyController : ControllerBase
     {
         private readonly IAgencyService _agencyService;
+        private readonly IUploadProfileImageService _uploadProfileImageService;
 
-        public AgencyController(IAgencyService agencyService)
+        public AgencyController(IAgencyService agencyService, IUploadProfileImageService uploadProfileImageService)
         {
             _agencyService = agencyService;
+            _uploadProfileImageService = uploadProfileImageService;
         }
 
         [HttpGet("GetAllAgencies")]
@@ -33,7 +36,7 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
 
 
         [HttpPut("UpdateAgency/{id:int}")]
-        public async Task<IActionResult> UpdateAgency(int id, [FromBody] CreateAgencyDto updatedAgency)
+        public async Task<IActionResult> UpdateAgency(int id, [FromBody] UpdateAgencyDto updatedAgency)
         {
         
 
@@ -43,5 +46,21 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("UploadAgencyLogo/{id}")]
+        public async Task<IActionResult> UploadAgencyLogo(int id, IFormFile file)
+        {
+            try
+            {
+                var url = await _uploadProfileImageService.UploadImageAsync(id, "agency", file);
+                
+                return Ok(new { imageUrl = url });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }
