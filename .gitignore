@@ -61,4 +61,6 @@ obj/
 .env
 .vs/
 * text=auto
+#Credentials
 appsettings.json
+appsettings.*.json
