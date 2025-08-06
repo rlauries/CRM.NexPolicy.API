@@ -32,13 +32,15 @@ public class LeadRepository : ILeadRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<List<LeadModel>> GetAllLeadsAsync()
+    public async Task<List<LeadModel>> GetAllLeadsByAgencyIdAsync(int agencyId)
     {
         return await _dbContext.Leads
+            .Where(l => l.AgencyId == agencyId)
             .Include(l => l.Agent)
             .Include(l => l.Status)
             .Include(l => l.LeadSource)
             .ToListAsync();
     }
+
 
 }

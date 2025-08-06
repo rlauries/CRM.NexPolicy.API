@@ -25,7 +25,6 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.CustomerRepository
         {
             return await _dbContext.Customers
                 .Include(c => c.Agent)
-                .Include(c => c.Gender)
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -39,7 +38,6 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.CustomerRepository
         {
             return await _dbContext.Customers
                 .Include(c => c.Agent)
-                .Include(c => c.Gender)
                 .ToListAsync();
         }
 

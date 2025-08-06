@@ -24,7 +24,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Lead
         public LeadSourceModel? LeadSource { get; set; }
 
         // ✅ Foreign key a tabla LeadStatuses
-        public int StatusId { get; set; }
+        public int LeadStatusId { get; set; }
         public LeadStatusModel? Status { get; set; }
 
         public bool IsConvertedToCustomer { get; set; } = false;
@@ -36,7 +36,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Lead
         public AgencyModel Agency { get; set; } = null!;
 
         // ✅ Foreign key a tabla Agents
-        public int? AssignedAgentID { get; set; }
+        public int? AgentId { get; set; }
         public AgentModel? Agent { get; set; }
     }
 }

@@ -7,7 +7,7 @@ public interface ILeadRepository
     Task<int> InsertAsync(LeadModel lead);
     Task<LeadModel?> GetLeadByIdAsync(int leadId);
     Task UpdateAsync(LeadModel lead);
-    Task<List<LeadModel>> GetAllLeadsAsync();
+    Task<List<LeadModel>> GetAllLeadsByAgencyIdAsync(int agencyId);
 
 
 }

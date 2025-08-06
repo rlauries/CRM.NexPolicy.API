@@ -1,6 +1,8 @@
 ﻿using CRM.NexPolicy.src.DataLayer.Models.Agent;
 using CRM.NexPolicy.src.DataLayer.Repository;
+using CRM.NexPolicy.src.ViewLayer.DTOs.Agent;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace CRM.NexPolicy.src.DataLayer.Repository.AgentRepository
 {
@@ -23,27 +25,47 @@ namespace CRM.NexPolicy.src.DataLayer.Repository.AgentRepository
         public async Task<AgentModel?> GetByIdAsync(int id)
         {
             return await _dbContext.Agents
-                .Include(a => a.Leads)
-                .Include(a => a.Customers)
+                .Include(a => a.IndividualStatus)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
-        public async Task<List<AgentModel>> GetAllAsync()
+        public async Task<List<AgentModel>> GetAllAgentyByAgencyIdAsync(int agencyId)
         {
-            var allAgent = await _dbContext.Agents
-                .Include(a => a.Leads)
-                .Include(a => a.Customers)
+            var list = await _dbContext.Agents
+                .Where(a => a.AgencyId == agencyId)
                 .AsNoTracking()
                 .ToListAsync();
-
-            foreach (var agent in allAgent)
-            {
-                Console.WriteLine($"Agent {agent.Id} has {agent.Leads?.Count ?? 0} leads and {agent.Customers?.Count ?? 0} customers.");
-            }
-
-            return allAgent;
+            return list;
         }
+        public async Task<AgentModel> PatchAgentProfileByIdAsync(AgentPersonalInfoPatchDto dto)
+        {
+            var agent = await _dbContext.Agents.FirstOrDefaultAsync(a => a.Id == dto.Id);
+            
+            // Actualizamos los campos solo si vienen con datos
+            if (dto.IndividualStatusId.HasValue)
+                agent.IndividualStatusId = dto.IndividualStatusId;
 
+            if (!string.IsNullOrWhiteSpace(dto.Email))
+                agent.Email = dto.Email;
+
+            if (!string.IsNullOrWhiteSpace(dto.Phone))
+                agent.CellPhone = dto.Phone;
+
+            if (!string.IsNullOrWhiteSpace(dto.Address))
+                agent.Address = dto.Address;
+
+            if (!string.IsNullOrWhiteSpace(dto.City))
+                agent.City = dto.City;
+
+            if (!string.IsNullOrWhiteSpace(dto.State))
+                agent.State = dto.State;
+
+            if (!string.IsNullOrWhiteSpace(dto.ZipCode))
+                agent.ZipCode = dto.ZipCode;
+
+            await _dbContext.SaveChangesAsync();
+            return agent;
+        }
 
     }
 }

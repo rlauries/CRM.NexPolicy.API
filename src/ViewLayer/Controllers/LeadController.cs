@@ -69,10 +69,10 @@ namespace CRM.NexPolicy.src.ViewLayer.Controllers
             }
         }
 
-        [HttpGet("GetAllLeads")]
-        public async Task<IActionResult> GetAllLeads()
+        [HttpGet("GetAllLeadsByAgencyId/{agentcyId}")]
+        public async Task<IActionResult> GetAllLeads(int agentcyId)
         {
-            var leads = await _leadService.GetAllLeadsWithAgentAsync();
+            var leads = await _leadService.GetAllLeadsByAgencyIdAsync(agentcyId);
             return Ok(leads);
         }
 

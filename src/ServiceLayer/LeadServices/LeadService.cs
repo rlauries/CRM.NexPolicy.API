@@ -2,6 +2,7 @@
 using CRM.NexPolicy.src.DataLayer.Repository.LeadRepository;
 using CRM.NexPolicy.src.ServiceLayer.LeadServices;
 using CRM.NexPolicy.src.ViewLayer.DTOs.Lead;
+using Microsoft.Identity.Client;
 
 namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
 {
@@ -21,8 +22,9 @@ namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
             creatingLeads.LastName = lead.LastName;
             creatingLeads.Email = lead.Email;
             creatingLeads.PhoneNumber = lead.PhoneNumber;
-            creatingLeads.StatusId = lead.StatusId;
+            creatingLeads.LeadStatusId = lead.LeadStatusId;
             creatingLeads.LeadSourceId = lead.LeadSourceId;
+            creatingLeads.AgencyId = lead.AgencyId;
 
             // Aquí puedes agregar lógica adicional (validaciones, normalización, etc.)
             return await _leadRepository.InsertAsync(creatingLeads);
@@ -70,9 +72,10 @@ namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
             };
         }
 
-        public async Task<IEnumerable<LeadWithAgentDto>> GetAllLeadsWithAgentAsync()
+        //-----Get Lead by Agency Id -------------------
+        public async Task<IEnumerable<LeadWithAgentDto>> GetAllLeadsByAgencyIdAsync(int agencyId)
         {
-            var leads = await _leadRepository.GetAllLeadsAsync();
+            var leads = await _leadRepository.GetAllLeadsByAgencyIdAsync(agencyId);
 
             return leads.Select(lead => new LeadWithAgentDto
             {

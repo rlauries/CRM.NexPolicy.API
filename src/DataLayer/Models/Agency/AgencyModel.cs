@@ -24,7 +24,7 @@ namespace CRM.NexPolicy.src.DataLayer.Models.Agency
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public string? ProfileImageUrl { get; set; }
         // Relationships
-        public List<AgentModel>? Agents { get; set; }
+        public List<AgentModel>? Agents { get; set; } = new List<AgentModel>();
         public List<LeadModel>? Leads { get; set; }
         public List<CustomerModel>? Customers { get; set; }
     }

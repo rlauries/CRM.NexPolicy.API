@@ -40,7 +40,6 @@ namespace CRM.NexPolicy.src.ServiceLayer.Customer
                 HomePhone = customer.HomePhone,
                 CellPhone = customer.CellPhone,
                 GenderId = customer.GenderId,
-                GenderName = customer.Gender?.Name,
                 Address = customer.Address,
                 PlanType = customer.PlanType,
                 EnrollmentDate = customer.EnrollmentDate,
@@ -64,7 +63,6 @@ namespace CRM.NexPolicy.src.ServiceLayer.Customer
                 HomePhone = customer.HomePhone,
                 CellPhone = customer.CellPhone,
                 GenderId = customer.GenderId,
-                GenderName = customer.Gender?.Name,
                 Address = customer.Address,
                 PlanType = customer.PlanType,
                 EnrollmentDate = customer.EnrollmentDate,
@@ -85,7 +83,7 @@ namespace CRM.NexPolicy.src.ServiceLayer.Customer
             var customer = new CreateCustomerDto
             {
                 //From LeadModel
-                AgentId = (int)lead.AssignedAgentID,
+                AgentId = (int)lead.AgentId,
                 FirstName = lead.Name,
                 LastName = lead.LastName,
                 Email = lead.Email,
@@ -113,7 +111,7 @@ namespace CRM.NexPolicy.src.ServiceLayer.Customer
 
             lead.IsConvertedToCustomer = true;
             lead.ConvertedToCustomerAt = DateTime.UtcNow;
-            lead.StatusId = 5;
+            lead.LeadStatusId = 5;
             await _leadRepository.UpdateAsync(lead);
 
             return customerMapped;

@@ -21,30 +21,40 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
         public DbSet<AgentModel> Agents { get; set; }
         public DbSet<LeadModel> Leads { get; set; }
         public DbSet<CustomerModel> Customers { get; set; }
+        public DbSet<PersonModel> Persons { get; set; }
+
 
         //Table References for Normalization
         public DbSet<GenderTypeModel> GenderTypes { get; set; }
         public DbSet<LeadSourceModel> LeadSources { get; set; }
         public DbSet<LeadStatusModel> LeadStatuses { get; set; }
+        public DbSet<IndividualType> IndividualTypes { get; set; }
+        public DbSet<IndividualStatus> IndividualStatuses { get; set; }
+
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Herencia TPT
-            modelBuilder.Entity<AgencyModel>().ToTable("Agencies");
             modelBuilder.Entity<PersonModel>().ToTable("Persons");
             modelBuilder.Entity<AgentModel>().ToTable("Agents");
             modelBuilder.Entity<CustomerModel>().ToTable("Customers");
             modelBuilder.Entity<LeadModel>().ToTable("Leads");
-            modelBuilder.Entity<LeadSourceModel>().ToTable("LeadSources");
+            modelBuilder.Entity<AgencyModel>().ToTable("Agencies");
             modelBuilder.Entity<UserModel>().ToTable("Users");
             modelBuilder.Entity<UserRoleModel>().ToTable("UserRoles");
+            modelBuilder.Entity<LeadSourceModel>().ToTable("LeadSources");
+            modelBuilder.Entity<LeadStatusModel>().ToTable("LeadStatuses");
+            modelBuilder.Entity<GenderTypeModel>().ToTable("GenderTypes");
+            modelBuilder.Entity<IndividualType>().ToTable("IndividualTypes");
+            modelBuilder.Entity<IndividualStatus>().ToTable("IndividualStatuses");
 
             // ============================ AGENCY ============================
             modelBuilder.Entity<AgencyModel>(entity =>
             {
                 entity.HasKey(a => a.Id);
+
                 entity.HasMany(a => a.Agents)
                       .WithOne(ag => ag.Agency)
                       .HasForeignKey(ag => ag.AgencyId);
@@ -60,24 +70,28 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
             // ============================ AGENT ============================
             modelBuilder.Entity<AgentModel>(entity =>
             {
-                entity.HasMany(a => a.Leads)
-                      .WithOne(l => l.Agent)
-                      .HasForeignKey(l => l.AssignedAgentID)
+                entity.HasOne(a => a.Agency)
+                      .WithMany(a => a.Agents)
+                      .HasForeignKey(a => a.AgencyId)
                       .OnDelete(DeleteBehavior.Restrict);
+                //entity.HasMany(a => a.Leads)
+                //      .WithOne(l => l.Agent)
+                //      .HasForeignKey(l => l.AssignedAgentID)
+                //      .OnDelete(DeleteBehavior.Restrict);
 
-                entity.HasMany(a => a.Customers)
-                      .WithOne(c => c.Agent)
-                      .HasForeignKey(c => c.AgentId)
-                      .OnDelete(DeleteBehavior.Restrict);
+                //entity.HasMany(a => a.Customers)
+                //      .WithOne(c => c.Agent)
+                //      .HasForeignKey(c => c.AgentId)
+                //      .OnDelete(DeleteBehavior.Restrict);
             });
 
             // ============================ LEAD ============================
             modelBuilder.Entity<LeadModel>(entity =>
             {
-                entity.HasOne(l => l.Agent)
-                      .WithMany(a => a.Leads)
-                      .HasForeignKey(l => l.AssignedAgentID)
-                      .OnDelete(DeleteBehavior.Restrict);
+                //entity.HasOne(l => l.Agent)
+                //      .WithMany(a => a.Leads)
+                //      .HasForeignKey(l => l.AssignedAgentID)
+                //      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(l => l.LeadSource)
                       .WithMany()
@@ -86,7 +100,7 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
 
                 entity.HasOne(l => l.Status)
                       .WithMany()
-                      .HasForeignKey(l => l.StatusId)
+                      .HasForeignKey(l => l.LeadStatusId)
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
@@ -97,7 +111,18 @@ namespace CRM.NexPolicy.src.DataLayer.Repository
                       .WithMany()
                       .HasForeignKey(p => p.GenderId)
                       .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(p => p.IndividualType)
+                      .WithMany()
+                      .HasForeignKey(p => p.IndividualTypeId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(p => p.IndividualStatus)
+                      .WithMany()
+                      .HasForeignKey(p => p.IndividualStatusId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
+
 
 
 

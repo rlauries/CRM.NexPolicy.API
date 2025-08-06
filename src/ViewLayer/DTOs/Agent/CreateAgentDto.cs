@@ -7,20 +7,26 @@ namespace CRM.NexPolicy.src.ViewLayer.DTOs.Agent
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public int AgencyId { get; set; }
+        
         public string? HomePhone { get; set; }
         public string? CellPhone { get; set; }
-        public string? MiddleName { get; set; }
-        public string? Nickname { get; set; }
-        public string? Title { get; set; }
+        
         public DateTime? DateOfBirth { get; set; }
-        public GenderTypeModel? Gender { get; set; }
+        public int? GenderId { get; set; } = 0;
         public string? SSN { get; set; }
         public string? DriversLicenseNumber { get; set; }
-
         public string LicenseNumber { get; set; } = string.Empty;
-        public DateTime ContractedDate { get; set; }
-        public bool IsActive { get; set; } = true;
-        public string? ManagerName { get; set; }
+
+        // Dirección 🏠
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? ZipCode { get; set; }
+
+        
+        
+
     }
 
 }

@@ -8,6 +8,6 @@ namespace CRM.NexPolicy.src.ServiceLayer.LeadServices
         Task<int> RegisterLeadAsync(CreateLeadDto lead); 
         Task<bool> UpdateLeadAsync(LeadModel lead);
         Task<LeadWithAgentDto?> GetLeadWithAgentNameByIdAsync(int id);
-        Task<IEnumerable<LeadWithAgentDto>> GetAllLeadsWithAgentAsync();
+        Task<IEnumerable<LeadWithAgentDto>> GetAllLeadsByAgencyIdAsync(int agencyId);
     }
 }
